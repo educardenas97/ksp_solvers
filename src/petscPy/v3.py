@@ -191,6 +191,19 @@ def graficar_tiempos_de_resolucion(tiempos_de_resolucion, solver_types, mat_file
     # Mostrar un mensaje cuando se hayan completado todas las ejecuciones
     print("Todas las ejecuciones completadas.")
 
+# Función para guardar los resultados en un archivo CSV
+def guardar_resultados_csv(tiempos_de_resolucion, solver_types, mat_file):
+    matrix_name, _ = os.path.splitext(os.path.basename(mat_file))
+    output_filename = f"{matrix_name}-resultados.csv"
+
+    with open(output_filename, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Solver', 'Tiempo de Resolución (s)'])
+
+        for solver, tiempo in zip(solver_types, tiempos_de_resolucion):
+            writer.writerow([solver, tiempo])
+
+    print(f"Resultados guardados en {output_filename}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -228,6 +241,9 @@ if __name__ == "__main__":
 
     # Generar gráfica de los tiempos de resolución
     graficar_tiempos_de_resolucion(tiempos_de_resolucion, solver_types, mat_file)
+
+    # Guardar los resultados en un archivo CSV
+    guardar_resultados_csv(tiempos_de_resolucion, solver_types, mat_file)
 
     # Mostrar un mensaje cuando se hayan completado todas las ejecuciones
     print("Todas las ejecuciones completadas.")
