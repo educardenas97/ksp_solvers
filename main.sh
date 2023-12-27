@@ -15,7 +15,7 @@ if [ ! -d "$directory_path" ]; then
 fi
 
 # Ruta al script Python
-python_script="src/petscPy/v3.py"
+python_script="src/main.py"
 
 # Loop a través de los archivos .mat dentro del directorio y ejecutar el script Python
 for mat_file in "./$directory_path"/*.mat; do

@@ -1,6 +1,6 @@
 # Resolución de Sistemas Lineales con PETSc y Python
 
-Este script de Python, `v3.py`, permite resolver sistemas lineales utilizando la biblioteca PETSc y graficar la convergencia de varios solvers. 
+Este script de Python, `main.py`, permite resolver sistemas lineales utilizando la biblioteca PETSc y graficar la convergencia de varios solvers. 
 
 
 
@@ -69,3 +69,24 @@ El script utiliza las siguientes dependencias de Python:
 
 Puedes instalar estas dependencias utilizando el archivo `requirements.txt`.
 
+# Solvers personalizados y parametrizaciones
+Por defecto, el script utiliza todas las variantes del GMRES disponibles en PETSc. Si deseas utilizar solvers personalizados, puedes modificar el script `main.sh` y reemplazar la línea 255:
+
+```bash
+ # Lista de tipos de solvers a probar
+    solver_types = [
+        "pdgmres",
+        "lgmres",
+        "pgmres",
+        "dgmres",
+        "pipefgmres",
+        "fgmres",
+        "gmres",
+    ] 
+# Puedes agregar más según sea necesario
+```
+
+Las tolerancias y otros parámetros de los solvers pueden ser modificados en el método `resolver_con_variante` del archivo `main.py`:
+```
+ksp.setTolerances(rtol=1e-8, atol=1e-8, max_it=100000)
+```
